@@ -1,0 +1,51 @@
+<html>
+<head>
+<link rel="Shortcut Icon" href="/favicon.ico">
+<link href="/style.css" rel="stylesheet" type="text/css" />
+<title>pcaputils: a python module to help analyze packet captures</title>
+
+<body>
+<div align=center>
+<img src=header.png width=700>
+<div style="width: 700px; text-align: left;">
+<h1>pcaputils: a python module to help parse/analyze packet captures</h1>
+<br>
+This used to be a page hosting pcaputils.py, the beginnings of my own pcap parser.  You can still download that code if you like, but these days I use dpkt.  It's got significant support for the upper level protocols as well as raw pcap parsing support.<br>
+<br>
+dpkt 1.6 [<a href="http://code.google.com/p/dpkt/">info</a>] [<a href="http://dpkt.googlecode.com/files/dpkt-1.6.tar.gz">source tarball</a>]<br>
+pcaputils 0.1.0 [<a href="0.1.0/pcaputils.py">download</a>] [<a href="changelog.txt">changelog</a>] [<a href="pcaputils.html">example</a>]<br>
+<br>
+<h2>How to use dpkt to parse pcap files</h2>
+<div id="code">
+<pre><font face="Lucida Console, Courier New"><font color="#0000AF"><b>import</b></font> <font color="#000000">socket</font>
+<font color="#0000AF"><b>import</b></font> <font color="#000000">dpkt</font>
+<font color="#0000AF"><b>import</b></font> <font color="#000000">sys</font>
+<font color="#000000">pcapReader</font> <font color="#303000"><b>=</b></font> <font color="#000000">dpkt</font><font color="#303000"><b>.</b></font><font color="#000000">pcap</font><font color="#303000"><b>.</b></font><font color="#000000">Reader</font><font color="#303000"><b>(</b></font><font color="#000000">file</font><font color="#303000"><b>(</b></font><font color="#000000">sys</font><font color="#303000"><b>.</b></font><font color="#000000">argv</font><font color="#303000"><b>[</b></font><font color="#FF2200">1</font><font color="#303000"><b>]</b></font><font color="#303000"><b>,</b></font> <font color="#A0008A">"rb"</font><font color="#303000"><b>)</b></font><font color="#303000"><b>)</b></font><font color="#0000AF">
+<b>for</b></font> <font color="#000000">ts</font><font color="#303000"><b>,</b></font> <font color="#000000">data</font> <font color="#0000AF"><b>in</b></font> <font color="#000000">pcapReader</font><font color="#303000"><b>:</b></font>
+    <font color="#000000">ether</font> <font color="#303000"><b>=</b></font> <font color="#000000">dpkt</font><font color="#303000"><b>.</b></font><font color="#000000">ethernet</font><font color="#303000"><b>.</b></font><font color="#000000">Ethernet</font><font color="#303000"><b>(</b></font><font color="#000000">data</font><font color="#303000"><b>)</b></font>
+    <font color="#0000AF"><b>if</b></font> <font color="#000000">ether</font><font color="#303000"><b>.</b></font><font color="#000000">type</font> <font color="#303000"><b>!=</b></font> <font color="#000000">dpkt</font><font color="#303000"><b>.</b></font><font color="#000000">ethernet</font><font color="#303000"><b>.</b></font><font color="#000000">ETH_TYPE_IP</font><font color="#303000"><b>:</b></font> <font color="#0000AF"><b>raise</b></font>
+    <font color="#000000">ip</font> <font color="#303000"><b>=</b></font> <font color="#000000">ether</font><font color="#303000"><b>.</b></font><font color="#000000">data</font>
+    <font color="#000000">src</font> <font color="#303000"><b>=</b></font> <font color="#000000">socket</font><font color="#303000"><b>.</b></font><font color="#000000">inet_ntoa</font><font color="#303000"><b>(</b></font><font color="#000000">ip</font><font color="#303000"><b>.</b></font><font color="#000000">src</font><font color="#303000"><b>)</b></font>
+    <font color="#000000">dst</font> <font color="#303000"><b>=</b></font> <font color="#000000">socket</font><font color="#303000"><b>.</b></font><font color="#000000">inet_ntoa</font><font color="#303000"><b>(</b></font><font color="#000000">ip</font><font color="#303000"><b>.</b></font><font color="#000000">dst</font><font color="#303000"><b>)</b></font>
+    <font color="#0000AF"><b>print</b></font> <font color="#A0008A">"%s -&gt; %s"</font> <font color="#303000"><b>%</b></font> <font color="#303000"><b>(</b></font><font color="#000000">src</font><font color="#303000"><b>,</b></font> <font color="#000000">dst</font><font color="#303000"><b>)</b></font><font color="#000000"></font></font>
+</pre>
+</div>
+<br>
+dpkt includes built-in parsers for ethernet, ip, tcp, udp and most major application protocols.  There's not 
+much documentation, but the interactive debugger and the source should be enough. <br>
+<br>
+</div>
+<br>
+14 Nov 09 - jjguy - <a href="mailto:jjg@jjguy.com">jjg@jjguy.com</a><br>
+</div>
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3500031-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD                           HTML 3.2 Final//EN"
+<html><head><title>pcaputils - python module to help analyze packet captures</title>
+<!--This document created by PySourceColor ver.1 on: Wed Dec 17 16:29:51 2008-->
+<meta http-equiv="Content-Type"                          content="text/html;charset=iso-8859-1" />
+</head><body bgcolor="#000000">
+<pre><font face="Lucida Console, Courier New" size=-1>
+<font color="#ffffff"># <a href="pcaputils.html">pcaputils:</a> a python module to help analyze packet captures
+# in standard pcap format from libpcap or winpcap</font>
+
+<font color="#8680FF"><b>import</b></font> <font color="#ffffff">sys</font>
+<font color="#8680FF"><b>import</b></font> <font color="#ffffff">pcaputils</font>
+
+<font color="#8680FF"><b>def</b></font> <font color="#EBAE5C"><b>handle_dns</b></font><font color="#FAF785"><b>(</b></font><font color="#ffffff">sec</font><font color="#FAF785"><b>,</b></font> <font color="#ffffff">usec</font><font color="#FAF785"><b>,</b></font> <font color="#ffffff">pkt</font><font color="#FAF785"><b>,</b></font> <font color="#ffffff">headers</font><font color="#FAF785"><b>)</b></font><font color="#FAF785"><b>:</b></font>
+    <font color="#8680FF"><b>print</b></font> <font color="#FF80C0">"%s:%d %s:%d (%d bytes)"</font> <font color="#FAF785"><b>%</b></font> <font color="#FAF785"><b>(</b></font><font color="#ffffff">headers</font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'ip'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'srcAddr'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>,</b></font> <font color="#ffffff">headers</font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'udp'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'srcPort'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>,</b></font>
+                                      <font color="#ffffff">headers</font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'ip'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'dstAddr'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>,</b></font> <font color="#ffffff">headers</font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'udp'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>[</b></font><font color="#F8BAFE">'dstPort'</font><font color="#FAF785"><b>]</b></font><font color="#FAF785"><b>,</b></font>
+                                      <font color="#ffffff">len</font><font color="#FAF785"><b>(</b></font><font color="#ffffff">pkt</font><font color="#FAF785"><b>)</b></font><font color="#FAF785"><b>)</b></font>
+    <font color="#8680FF"><b>print</b></font> <font color="#ffffff">pcaputils</font><font color="#FAF785"><b>.</b></font><font color="#ffffff">hexdump</font><font color="#FAF785"><b>(</b></font><font color="#ffffff">pkt</font><font color="#FAF785"><b>)</b></font>
+
+<font color="#8680FF"><b>if</b></font> <font color="#ffffff">__name__</font> <font color="#FAF785"><b>==</b></font> <font color="#FF80C0">"__main__"</font><font color="#FAF785"><b>:</b></font>
+    <font color="#ffffff">p</font> <font color="#FAF785"><b>=</b></font> <font color="#ffffff">pcaputils</font><font color="#FAF785"><b>.</b></font><font color="#ffffff">pcaputils</font><font color="#FAF785"><b>(</b></font><font color="#FF80C0">"capture.pcap"</font><font color="#FAF785"><b>)</b></font>
+    <font color="#ffffff">p</font><font color="#FAF785"><b>.</b></font><font color="#ffffff">subscribe</font><font color="#FAF785"><b>(</b></font><font color="#FF80C0">"udp['srcPort'] == 53 or udp['dstPort'] == 53"</font><font color="#FAF785"><b>,</b></font> <font color="#ffffff">handle_dns</font><font color="#FAF785"><b>)</b></font>
+    <font color="#ffffff">p</font><font color="#FAF785"><b>.</b></font><font color="#ffffff">auto</font><font color="#FAF785"><b>(</b></font><font color="#FAF785"><b>)</b></font><font color="#000000"></font></pre>
+<br>
+<font color="#ffffff">#Update:  check out dpkt, it's way better than this hacked together script! More info <a href="/pcaputils/">here.</a><br></font>
+<br>
+
+
+<!--This document created by PySourceColor ver.ver.1 on: Wed Dec 17 16:29:51 2008-->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3500031-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body></html>

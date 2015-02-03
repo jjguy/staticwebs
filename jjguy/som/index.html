@@ -1,0 +1,100 @@
+<html>
+<head>
+<link rel="Shortcut Icon" href="/favicon.ico">
+<link href="/style.css" rel="stylesheet" type="text/css" />
+<title>self-organizing maps in processing</title>
+<body>
+<div align=center>
+
+<img src=somcolor-before.png width=150 height=150 style="margin=0px;">
+<img src=somcolor-after.png width=150 height=150 style="margin=0px;">
+<img src=somlines-before.png width=150 height=150 style="margin=0px;">
+<img src=somlines-after.png width=150 height=150 style="margin=0px;">
+
+<div style="width: 600px; text-align: left;">
+
+<h1>Kohonen's self-organizing feature maps in Processing</h1>
+<b>Shortcuts to the demonstrations</b>: &nbsp;&nbsp;
+
+<a href="javascript:;" onClick="window.open('somColor/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=700,height=700,status=no,menubar=no,location=no');">Color map</a> <a href="somColor/somColor.pde">(source)</a>
+
+&nbsp;|&nbsp;
+
+<a href="javascript:;" onClick="window.open('somLines/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=700,height=700,status=no,menubar=no,location=no');">Grid map</a> <a href="somLines/somLines.pde">(source)</a>
+<br>
+
+<h2>Processing</h2>
+If you haven't used <a href=http://processing.org>processing,</a> you should spend some time with it.  It lowers the bar for 2D and 3D graphics programming without significantly restricting your creativity or flexibility.  In addition to what you'll find below, here are some <a href=http://www.complexification.net/gallery/>beautiful examples</a> of what's possible, complete with source code.
+
+<h2>Kohonen's maps - the introduction</h2>
+
+Kohonen's self-organizing maps are a type of neural network used to classify inputs of consistent but arbitrary dimension.  The most popular unsupervised training algorithm, it does not require a 'teacher' to direct the outputs.  It does require training on a set of data. Training is where the magic happens. 
+<br>
+<br>
+Some sources to flesh out my curt introduction:
+<ul>
+<li> From ai-junkie.com: <a href=http://www.ai-junkie.com/ann/som/som1.html>tutorial</a>
+<li> A more mathematical <a href=http://mlab.taik.fi/~timo/som/thesis-som.html>introduction</a>
+<li> <a href=http://www.generation5.org/content/2004/aiSomPic.asp>One more.</a> Redundant content, but unique exemplars.
+</ul>
+
+<h2>Kohonen's maps - the algorithm</h2>
+
+A thorough introduction requires good diagrams, equations and such. This is best left to the links above and the others you'll find via your <a href=http://www.google.com/search?hl=en&q=self+organizing+maps>google search.</a><br>
+<br>
+In brief:
+<ul>
+<li>Allocate an m x n array
+<li>For each node in your array, allocate an N element array with initial values randomly distributed between 0 and 1. N is the number of dimensions of your input.  These are your initial weights.
+<li>For each training input vector:
+    <ul>
+    <li>Select the node with the closest matching weights.  Simple Euclidean distance is effective:  sqrt( (x1 - x2)^2 + (y1 - y2)^2 ... )
+    <li>Update the weights on this node
+    <li>Update the weights on this node's neighbors
+    </ul>
+</ul>
+The only complication is the definition of updates and neighbors.  I used three parameters: a decaying learning rate, a decaying radius and the distance from the best matching node.  The decay is controlled such that at the final iteration, inputs have no further influence on themselves or their neighbors.  The resulting equation for a node's update is:  w[i] = w[i] - learningDecay*influence*(w[i] - inputWeight).  <br>
+<br>
+
+<h2>"Hello, world" of SOMs</h2>
+
+Using a 40x40 map of nodes and a 3-dimensional input, I graph each node according to it's place in the array. I then color each node according to the value of the inputs, rgb-style. Each node was initialized with random values for each of the three weights, resulting in a rather motley view: <br>
+<br>
+<div style="text-align: center"><a href=somcolor-before.png><img src=somcolor-before.png width=200 height=200></a></div>
+<br>
+<br>
+The 10 colors across the bottom of the screen are the 10 training inputs.  I select one of these at random and feed into the map for 5000 iterations.  The final map:<br>
+<br>
+<div style="text-align: center"><a href=somcolor-after.png><img src=somcolor-after.png width=200 height=200></a></div>
+<br>
+<br>
+<b>Try it yourself:</b> <a href="javascript:;" onClick="window.open('somColor/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=700,height=700,status=no,menubar=no,location=no');">Launch.</a>  (link opens in new window)
+<br>
+<br>
+Watching the colors converge is cool, but I'm more impressed with the following example. Using a 15x15 array of nodes, I give each node a two-dimensional input then plot <i>according to the value of the weights as x-y coordinates</i>.  I also draw a line from each node to it's four neighbors. (or three, if it's on the edge.  or two, if it's a corner node.)  With each weight initialized to a random value, the initial graph is a spaghetti mess:<br>
+<br>
+<div style="text-align: center"><a href=somlines-before.png><img src=somlines-before.png width=200 height=200></a></div>
+<br>
+<br>
+I select random values between 0 and 1 for each of the weights and feed 10,000 inputs.  The final map:<br>
+<br>
+<div style="text-align: center;"><a href=somlines-after.png><img src=somlines-after.png width=200 height=200></a></div>
+<br>
+<br>
+<b>Try it yourself:</b> <a href="javascript:;" onClick="window.open('somLines/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=700,height=700,status=no,menubar=no,location=no');">Launch.</a>  (link opens in new window)
+<br>
+<br>
+</div>
+<div id="fixme">
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3500031-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

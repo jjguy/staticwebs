@@ -1,0 +1,149 @@
+Only in tcpflow-jj/src: 010.000.001.003.61094-010.000.001.006.00022
+Only in tcpflow-jj/src: 010.000.001.006.00022-010.000.001.003.61094
+diff tcpflow-jj/src/datalink.c tcpflow-0.21/src/datalink.c
+56d55
+<   struct timeval ts = h->ts;
+82c81
+<   process_ip(p + NULL_HDRLEN, caplen - NULL_HDRLEN, length, ts);
+---
+>   process_ip(p + NULL_HDRLEN, caplen - NULL_HDRLEN);
+94d92
+<   struct timeval ts = h->ts;
+115,116c113
+< 	     caplen - sizeof(struct ether_header), 
+<          length, ts);
+---
+> 	     caplen - sizeof(struct ether_header));
+129d125
+<   struct timeval ts = h->ts;
+141c137
+<   process_ip(p + PPP_HDRLEN, caplen - PPP_HDRLEN, length, ts);
+---
+>   process_ip(p + PPP_HDRLEN, caplen - PPP_HDRLEN);
+152d147
+<   struct timeval ts = h->ts;
+159c154
+<   process_ip(p, caplen, length, ts);
+---
+>   process_ip(p, caplen);
+167d161
+<   struct timeval ts = h->ts;
+179c173
+<   process_ip(p + SLL_HDR_LEN, caplen - SLL_HDR_LEN, length, ts);
+---
+>   process_ip(p + SLL_HDR_LEN, caplen - SLL_HDR_LEN);
+Binary files tcpflow-jj/src/datalink.o and tcpflow-0.21/src/datalink.o differ
+diff tcpflow-jj/src/flow.c tcpflow-0.21/src/flow.c
+55,80d54
+< void write_flow_metadata()
+< {
+<   int i = 0;
+<   flow_state_t *ptr;
+<   FILE *fp = fopen("metadata.txt", "a");
+<   char *filename = NULL;
+< 
+<   fprintf(fp, "srcip.srcport,dstip.dstport,firstts,lastts,bytes\n");
+<   if(NULL == fp) {
+<     DEBUG(2)("failed to open metadata file");
+<     return;
+<   }
+< 
+<   for(i = 0; i < HASH_SIZE; i++) {
+<      if(NULL != flow_hash[i]) {
+<         for(ptr = flow_hash[i]; ptr != NULL; ptr = ptr->next) {
+<             filename = flow_filename(ptr->flow); 
+<             fprintf(fp, "%s,%d.%d,%d.%d,%d\n", filename, ptr->first_ts.tv_sec,
+<                     ptr->first_ts.tv_usec, ptr->last_ts.tv_sec, ptr->last_ts.tv_usec,
+<                     ptr->length);
+<         }
+<      }
+<   }
+< 
+<   fclose(fp);
+< }
+109d82
+<   new_flow->length = 0;
+126,129c99
+<     //if (!memcmp((char *) &flow, (char *) &(ptr->flow), sizeof(flow))) {
+<     if (flow.src == ptr->flow.src && flow.dst == ptr->flow.dst &&
+<         flow.sport == ptr->flow.sport && flow.dport == ptr->flow.dport) 
+<     {
+---
+>     if (!memcmp((char *) &flow, (char *) &(ptr->flow), sizeof(flow))) {
+Binary files tcpflow-jj/src/flow.o and tcpflow-0.21/src/flow.o differ
+diff tcpflow-jj/src/main.c tcpflow-0.21/src/main.c
+102d101
+<   write_flow_metadata();
+275,277c274
+<   if (pcap_loop(pd, -1, handler, NULL) < 0) {
+<     DEBUG(1)("exiting via die");
+<     write_flow_metadata();
+---
+>   if (pcap_loop(pd, -1, handler, NULL) < 0)
+279d275
+<   }
+282,283d277
+<   DEBUG(1)("exiting via return in main()");
+<   write_flow_metadata();
+Binary files tcpflow-jj/src/main.o and tcpflow-0.21/src/main.o differ
+Binary files tcpflow-jj/src/tcpflow and tcpflow-0.21/src/tcpflow differ
+diff tcpflow-jj/src/tcpflow.h tcpflow-0.21/src/tcpflow.h
+69,70d68
+<   u_int32_t origlen;    /* Original capture length of flow */
+<   struct timeval ts;    /* Arrival timestamp */
+72a71
+> 
+81,83d79
+<   long length;          /* total length of this flow */
+<   struct timeval first_ts;   /* timestamp of first packet */
+<   struct timeval last_ts;    /* timestamp of last packet */
+135,136c131
+< void process_ip(const u_char *data, u_int32_t length, 
+<                 u_int32_t origlen, struct timeval ts);
+---
+> void process_ip(const u_char *data, u_int32_t length);
+138c133
+< 		 u_int32_t dst, u_int32_t origlen, struct timeval ts);
+---
+> 		 u_int32_t dst);
+146d140
+< void write_flow_metadata();
+diff tcpflow-jj/src/tcpip.c tcpflow-0.21/src/tcpip.c
+69c69
+< void process_ip(const u_char *data, u_int32_t caplen, u_int32_t origlen, struct timeval ts)
+---
+> void process_ip(const u_char *data, u_int32_t caplen)
+115,116c115
+< 	      ntohl(ip_header->ip_dst.s_addr),
+<           origlen, ts);
+---
+> 	      ntohl(ip_header->ip_dst.s_addr));
+118a118
+> 
+120c120
+< 		 u_int32_t dst, u_int32_t origlen, struct timeval ts)
+---
+> 		 u_int32_t dst)
+146,147d145
+<   this_flow.origlen = origlen;
+<   this_flow.ts = ts;
+210d207
+<     printf("creating state for %s\n", flow_filename(flow));
+212,215d208
+<     
+<     /* set first timestamp value for this flow */
+<     state->first_ts.tv_sec = flow.ts.tv_sec;
+<     state->first_ts.tv_usec = flow.ts.tv_usec;
+218,222d210
+<   /* we can end at any point, so update every packet timestamp
+<    * like it could be your last.  */
+<   state->last_ts.tv_sec = flow.ts.tv_sec;
+<   state->last_ts.tv_usec = flow.ts.tv_usec;
+< 
+227,230d214
+<   /* update the total payload length for this flow */
+<   printf("state->length: %d\t\toriglen: %d\n", state->length, flow.origlen);
+<   state->length = state->length + flow.origlen;
+< 
+Binary files tcpflow-jj/src/tcpip.o and tcpflow-0.21/src/tcpip.o differ
+Binary files tcpflow-jj/src/util.o and tcpflow-0.21/src/util.o differ

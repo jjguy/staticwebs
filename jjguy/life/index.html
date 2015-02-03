@@ -1,0 +1,63 @@
+<html>
+<head>
+<link rel="Shortcut Icon" href="/favicon.ico">
+<link href="/style.css" rel="stylesheet" type="text/css" />
+<title>conway's game of life in processing</title>
+<body>
+<div align=center>
+
+<img src=header-a.png width=175 style="margin=0px;">
+<img src=header-b.png width=175 style="margin=0px;">
+<img src=header-c.png width=175 style="margin=0px;">
+
+<div style="width: 600px; text-align: left;">
+
+<h1>Conway's Game of Life in Processing</h1>
+<b>Shortcuts to the demonstration</b>: &nbsp;&nbsp;
+
+<a href="javascript:;" onClick="window.open('applet/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=900,height=700,status=no,menubar=no,location=no');">Game of Life</a> <a href="applet/gameOfLife.pde">(source)</a>
+
+<h2>Processing</h2>
+If you haven't used <a href=http://processing.org>processing,</a> you should spend some time with it.  It lowers the bar for 2D and 3D graphics programming without significantly restricting your creativity or flexibility.  In addition to what you'll find below, here are some <a href=http://www.complexification.net/gallery/>beautiful examples</a> of what's possible, complete with source code.
+
+<h2>Conway's Game of Life - the introduction</h2>
+Conway's Game of Life is a cellular automaton.  Consider an MxN array of living cells.  A cell can neither live alone nor in too large a crowd.  Cells in healthy neighborhoods are born. With each generation (iteration), the health of the neighborhood is calculated and cells survive, perish or are born accordingly.<br>
+<br>
+Conway's rules are thus:
+<ul>
+  <li>Live cells with less than two neighbors die.
+  <li>Live cells with more than three neighbors die. 
+  <li>Live cells with two or three neighbors survive.
+  <li>Dead cells with three neighbors are born.
+</ul>
+These simple rules, when applied to an initial state, have surprisingly complex results.  Wikipedia has a <a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life>good introduction,</a> including examples of stable constructs, oscillating constructs and oscillating and moving constructs.  Try building these constructs in the <a href="javascript:;" onClick="window.open('applet/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=900,height=700,status=no,menubar=no,location=no');">demo</a> and seeing for yourself.
+
+<h2>Other curious constructs</h2>
+<p><b>5 cell horizontal line</b></p>
+<p>Starting with a 5 cell horizontal line, the games evolves into four blinkers.</p>
+<div style="text-align:center"><img src=5osc.gif width=400><br>5 cells evolving into 4 blinkers<br></div>
+<br>
+<p><b>10 cell horizontal line</b></p>
+<p>Starting with a 10 cell horziontal line, the game immediately evolves into a 15 cycle oscillator.</p>
+<div style="text-align: center"><img src=initial-10.png><br>Iteration 1.<br><br></div>
+<div style="text-align: center"><img src=iter1.png><br>Iteration 2.<br><br></div>
+<div style="text-align: center"><img src=iter2.png><br>Iteration 3.<br><br></div>
+<div style="text-align: center"><img src=10osc.gif width=400><br>Iterations 3 - 17, looped.<br><br></div>
+<br>
+Don't settle for my pictures, <b>try it yourself</b>: &nbsp;&nbsp;
+<a href="javascript:;" onClick="window.open('applet/index.html', 'cview', 'scrollbars=yes,resizable=yes,width=900,height=700,status=no,menubar=no,location=no');">Game of Life</a> <a href="applet/gameOfLife.pde">(source)</a>
+<br>
+<br>
+
+<script>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3500031-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+17 Oct 09 - jjguy - <a href="mailto:jjg@jjguy.com">jjg@jjguy.com</a><br>
+</body>
+</html>

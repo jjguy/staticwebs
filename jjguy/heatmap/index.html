@@ -1,0 +1,281 @@
+<html>
+<head>
+<link rel="Shortcut Icon" href="/favicon.ico">
+<link href="/style.css" rel="stylesheet" type="text/css" />
+<title>heatmap.py: create heatmaps in python</title>
+<body>
+<div align=center>
+
+<img src=fire.png width=150 height=150 style="margin=0px;">
+<img src=classic.png width=150 height=150 style="margin=0px;">
+<img src=omg.png width=150 height=150 style="margin=0px;">
+<img src=pgaitch.png width=150 height=150 style="margin=0px;">
+
+<div style="width: 600px; text-align: left;">
+
+<h1>heatmap.py:  create heatmaps in python</h1>
+<b>Download</b>: &nbsp;&nbsp; Linux, OSX <a href="heatmap-2.2.1.tar.gz">heatmap-2.2.1.tar.gz</a><br>
+<b>Download</b>: &nbsp;&nbsp; Windows <a href="heatmap-2.2.1.zip">heatmap-2.2.1.zip</a><br>
+<b>github</b>: &nbsp;&nbsp; <a href="https://github.com/jjguy/heatmap">heatmap on github</a><br>
+<!--<b>Python Package Index</b>: &nbsp;&nbsp; <a href=http://pypi.python.org/pypi/heatmap>heatmap on pypi</a><br>-->
+<br>
+<b>To install</b>: 
+<pre> $ cd heatmap-2.2.1; python setup.py install</pre>
+Requires the <a href=http://www.pythonware.com/products/pil/>Python Imaging Library</a> and Python 2.5+.<br>
+<!--Available on PyPI for easy_install or pip users.<br>-->
+<h2>Example</h2>
+<pre style="background:#fff; border: 2px solid black; padding: 5px;">
+import heatmap
+import random
+
+if __name__ == "__main__":    
+    pts = []
+    for x in range(400):
+        pts.append((random.random(), random.random() ))
+
+    print "Processing %d points..." % len(pts)
+
+    hm = heatmap.Heatmap()
+    img = hm.heatmap(pts)
+    img.save("classic.png")
+</pre>
+<h2>Changelog</h2>
+<b>2.2.1 - 11 Jan 13</b> <a href=heatmap-2.2.1.tar.gz>[tgz]</a> <a href=heatmap-2.2.1.zip>[zip]</a>
+<ul>
+    <li> pip install bugfix.  sorry pip folks!  thanks to Jordi Llonch again for the bugfix
+    <li> bugfix in the area parameter for non-square areas; thanks to github.com/y3pp3r
+</ul>
+<b>2.2 - 2 Oct 12</b> <a href=heatmap-2.2.tar.gz>[tgz]</a> <a href=heatmap-2.2.zip>[zip]</a>
+<ul>
+    <li>modifed API to return Image instance; caller must specify filename
+    <li>restructured project layout to be more standardized
+    <li>added to pypi
+    <li>many thanks to <a href=https://github.com/llonchj/>Jordi Llonch</a> for the pull request
+</ul>
+<b>2.1.1 - 27 Sep 12</b> <a href=heatmap-2.1.1.tar.gz>[tgz]</a> <a href=heatmap-2.1.1.zip>[zip]</a>
+<ul>
+    <li>added cygwin installation support, thanks to Michael C.
+    <li>fixed gross omission of kml support. 
+    <li>fixed bug in minimum value computation with negative values
+    <li>fixed broken opacity for areas with no density
+</ul>
+<b>2.1 - 20 Sep 12</b> <a href=heatmap-2.1.tar.gz>[tgz]</a> <a href=heatmap-2.1.zip>[zip]</a>
+<ul>
+    <li>fixed bug that flipped x/y coordinates - thanks to Curt Hartung for the find and fix
+    <li>added area parameter to allow caller to specify data bounds - thanks to Alex Little for the design.
+    <li>various small cleanups
+</ul>
+<b>2.0 - 17 Sep 12</b> <a href=heatmap-2.0.tar.gz>[tgz]</a> <a href=heatmap-2.0.zip>[zip]</a>
+<ul>
+    <li> moved heavy lifting into C module.  Compiles on POSIX systems,
+      pre-compiled DLLs provided for x86 and x64 Windows systems.  Significant perf increase: now 10k points in 5s
+    <li> joined the fad and moved source to github.
+</ul>
+<b>1.1 - 31 Jan 10</b> <a href=heatmap-1.1.tar.gz>[tgz]</a> 
+<ul>
+    <li>modified _colorize() to not use putpixel; 
+      reduced processing time for 1024x1024 image from 14s to 5s for 100 points
+</ul>
+<b>1.0 - 24 Nov 2009</b> <a href=heatmap-1.0.tar.gz>[tgz]</a>
+<ul>
+    <li>Initial release
+</ul>
+
+<h2>Bugs, Feedback, Comments or Questions</h2>
+<a href=https://twitter.com/jjguy>@jjguy</a><br>
+<a href=mailto:jjg@jjguy.com>jjg@jjguy.com</a><br>
+<a href="https://github.com/jjguy/heatmap">github</a>
+<h2>Highlights</h2>
+<p>heatmap() takes a list of x, y coordinate tuples and returns a PIL Image object describing their density as a heatmap. Some highlights: </p>
+<ul>
+<li>Independent autoscaling in both x and y ranges
+<li>Variable output image size
+<li>Five output color schemes
+<li>Tweakable intensity by modifying point size 
+<li>Google Earth KML output (assumes input coordinates are lat/long in decimal degrees)
+</ul>
+<h2>Google Earth</h2>
+<p>After creating the output image, you can call saveKML() to create a <a href=http://code.google.com/apis/kml/documentation/mapsSupport.html>KML file</a>
+for Google Earth.  It assumes the list of input points are a series of lat/long 
+coordinates in decimal degrees.  When loaded into Google Earth, you will see the
+ heatmap as a <a href=http://code.google.com/apis/kml/documentation/kml_tut.html#ground_overlays>Ground Overlay</a>.</p>
+<pre style="background:#fff; border: 2px solid black; padding: 5px;">
+import heatmap
+import random
+
+hm = heatmap.Heatmap()
+pts = [(random.uniform(-77.012, -77.050), random.uniform(38.888, 38.910)) for x in range(100)]
+hm.heatmap(pts)
+hm.saveKML("data.kml")
+</pre>
+<p>A heatmap over downtown Washington, DC:</p>
+<div style="text-align: center">
+<img src=google-maps.png><br>
+<b>Heatmap loaded into Google Earth</b><br>
+1024x1024 image, opacity 128, 150px dotsize <br>
+100 random points in downtown DC
+</div>
+<h2>Color Schemes</h2>
+<p>heatmap() comes with 5 color schemes:<br>
+<br>
+<div style="text-align: center">
+<table>
+  <tr>
+    <td width=150px>
+       &nbsp;
+    </td>
+    <td width=50px>
+      <img src=schemes/classic.png><br>
+      classic
+    </td>
+    <td width=50px>
+      <img src=schemes/fire.png><br>
+      fire
+    </td>
+    <td width=50px>
+      <img src=schemes/omg.png><br>
+      omg
+    </td>
+    <td width=50px>
+      <img src=schemes/pbj.png><br>
+      pbj
+    </td>
+    <td width=50px>
+       <img src=schemes/pgaitch.png><br>
+       pgaitch
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan=5>
+     <div style="text-align:center">
+        <b>Available color schemes</b><br>
+        Colors at the top are used for the<br>
+        densest areas, the bottom the sparsest.
+    </td>
+  </tr>
+</table>
+</div>
+<br>
+These color schemes are directly from <a href=http://code.google.com/p/gheat/>gheat</a>.  (See 'credit', below) 'classic' is used by 
+default, use another via the 'scheme' argument: <br>
+<pre style="background:#fff; border: 2px solid black; padding: 5px;">
+    hm = heatmap.Heatmap()
+    hm.heatmap(pts, scheme='fire').save("fire.png")
+</pre>
+<h2>Details</h2>
+<p>heatmap() has only two required parameters:
+<ul>
+<li>A list of two-element tuples
+<li>The filename to save the resulting image
+</ul>
+There are several optional parameters, with reasonable defaults:
+<pre style="background:#fff; border: 2px solid black; padding: 5px;">
+ |  heatmap(self, points, dotsize=150, opacity=128, size=(1024, 1024), scheme='classic', area=None)
+ |      points  -> an iteratable list of tuples, where the contents are the
+ |                 x,y coordinates to plot. e.g., [(1, 1), (2, 2), (3, 3)]
+ |      dotsize -> the size of a single coordinate in the output image in
+ |                 pixels, default is 150px.  Tweak this parameter to adjust
+ |                 the resulting heatmap.
+ |      opacity -> the strength of a single coordiniate in the output image.
+ |                 Tweak this parameter to adjust the resulting heatmap.
+ |      size    -> tuple with the width, height in pixels of the output PNG
+ |      scheme  -> Name of color scheme to use to color the output image.
+ |                 Use schemes() to get list.  (images are in source distro)
+ |      area    -> Specify bounding coordinates of the output image. Tuple of 
+ |                 tuples: ((minX, minY), (maxX, maxY)).  If None or unspecified, 
+ |                 these values are calculated based on the input data.
+ | 
+ |      Returns a PIL Image object.  Call .save(fname) to write to disk.
+</pre>
+Most options are self-explanatory, but dotsize, opacity and area could use some background.<br>
+<br>
+<b>Tweaking the heatmap output</b><br>
+<br>
+During processing, heatmap() builds a temporary image of one point.  The image is grayscale, has radius of dotsize pixels and a decreasing density from the center outwards.  A single dot at the default dotsize (150px) looks like this:<br>
+<br>
+<div style="text-align: center;">
+<img src="150pxdot.png"><br>
+<b>A single point</b><br>
+</div>
+<br>
+The dot is placed into the output image for each input point at the translated output
+image coordinate. The input points are unbounded.  Values between 0 and 1 work as well 
+as values between 5600 and 930000. The smallest points are placed at (0, 0) in the 
+output image, with the largest points at (width, height). The x and y axes autoscale
+independently of each other.<br>
+<br>
+Dots are blended into the output image with an additive process: as points are 
+placed on top of each other, they become darker. After
+all input points have been blended into the output image, the ouput image is colored 
+based on the darkness of each pixel.<br>
+<br>
+Before colorization, the sample script above builds (in memory) an intermediate output 
+image similar to:<br>
+<br>
+<div style="text-align: center">
+<img src="intermediate.png"><br>
+<b>Before colorization<br></b>
+400 random points, 0 &lt; pt &lt; 1<br>
+1024x1024 image, 150px dotsize, opacity 255<br>
+</div>
+<br>
+After colorizing with the 'classic' scheme (the default), the same image looks like this:<br>
+<br>
+<div style="text-align: center">
+<img src="intermediate-classic.png"><br>
+<b>After colorization with the 'classic' scheme.<br></b>
+400 random points, 0 &lt; pt &lt; 1<br>
+1024x1024 image, 150px dotsize, opacity 255<br>
+</div>
+<br>
+Appropriate dotsize is a factor of your output image size, the density of your 
+dataset and desired results. Tweak as you see fit.<br>
+<br>
+Opacity changes the transparency of the color during the colorization process.  If you 
+want to use the heatmap as an overlay, set the opacity such that you get your 
+desired results.<br>
+</p>
+<b>Autoscaling</b><br>
+<br>
+Version 2.1 added the area parameter, to allow override of the autoscale functionality.  The
+design follows Alex Little's design, described in his blog post <a href=http://alexlittle.net/blog/2010/09/08/applying-weighting-to-heatmaps/>Applying weighting to heatmaps</a>.<br>
+<p>The area parameter is a tuple of tuples:  ((min x, min y), (max x, max y)). If the area parameter is specified, 
+the (min x, min y) values will be associated with image pixels (0, 0); values (max x, max y) will be associated with 
+image pixels (size x, size y), dependent on image output resolution.</p> 
+
+<p>For example, random.random() produces outputs between 0 and 1.  To add a small border around the images, 
+we can specify the area to be (-0.25, 1.25):</p>
+<pre style="background:#fff; border: 2px solid black; padding: 5px;">
+>>> import heatmap
+>>> import random
+>>> pts = [(random.random(), random.random()) for x in range(50)]
+>>> hm = heatmap.Heatmap()
+>>> hm.heatmap(pts, area=((-0.25, -0.25), (1.25, 1.25))).save("classic.png")
+</pre>
+<div style="text-align:center">
+<img src="area-example.png" width=200><br>
+<b>User-specified area</b><br>
+400 random points between 0 and 1<br>
+Area specified as -0.25 to 1.25 in both x and y<br>
+1024x1024 image, 150px dotsize, opacity 255<br>
+</div>
+<h2>Feedback</h2>
+<p>This worked well enough for my datasets, but I had to tweak the algorithm several
+times.  If it doesn't work for your data, send me feedback (and your source data, if 
+you can.) I'll try to get more generalized algorithms in future releases.</p>
+<h2>Credit</h2>
+<p>The technique and color schemes came from <a href=http://code.google.com/p/gheat/>gheat</a>. If you need a web-enabled interface to heatmaps with Google Maps, gheat is a good tool for the job. I didn't do anything original, but merely took their work and generalized it. Chad credits <a href=http://blog.corunet.com/the-definitive-heatmap/>the definitive heatmap</a> as his starting point.  Like those projects, this project is under the <a href=http://www.opensource.org/licenses/mit-license.php>MIT license</a>. </p>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3500031-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>
