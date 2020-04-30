@@ -2525,9 +2525,6 @@ canvas#distorspirit {
     opacity: 1;
   }
   #fullpage .section .fp-tableCell {
-    border-bottom: 1px solid #22165b;
-  }
-  #fullpage .section .fp-tableCell {
     height: auto !important;
     vertical-align: baseline;
   }
