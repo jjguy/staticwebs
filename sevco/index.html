@@ -1,154 +1,37 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
-
-	<head>
-		<meta charset="utf-8">
-		<title>Sevco Security - Cybersecurity Situational Awareness</title>
-		<meta name="description" content="Sevco’s mission is to simplify and contextualize cybersecurity."
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Madeon08">
-
-        <!-- ================= Favicons ================== -->
-
-		<!-- ============== Resources style ============== -->
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-
-		<!-- Modernizr runs quickly on page load to detect features -->
-		<script src="js/modernizr.custom.js"></script>
-	</head>
-
-	<body>
-
-		<!-- *** LOADING *** -->
-
-		<div id="loading">
-
-			<div class="loader">
-				<span class="dots">	.</span>
-				<span class="dots">	.</span>
-				<span class="dots">	.</span>
-				<span class="dots">	.</span>
-				<span class="dots">	.</span>
-				<span class="dots">	.</span>
-				<p class="loader__label">Sevco | <span data-words="Loading"></span></p>
-			</div>
-		</div>
-
-		<!-- *** / LOADING *** -->
-
-		<!-- *** / Menu icon *** -->
-
-		<!-- *** Background slideshow. Settings in js/vegas.js *** -->
-		<!-- The overlay that you can see over the slideshow is generated with the following CSS rule : .vegas-overlay, it can be found in your style.css file under V1. SLIDESHOW part -->
-		<div class="slideshow"></div>
-
-		<!-- Logo on top right -->
-		<!-- <a class="brand-logo" href="#Home">
-			<img src="img/logo.png" alt="Our company logo" class="img-fluid" />
-		</a> -->
-
-		<!-- *** Fullpage sections *** -->
-		<div id="fullpage">
-
-			<!-- +++ START - Home +++ -->
-			<div class="section" id="section0">
-
-				<section class="content-inside-section">
-
-					<div class="container">
-
-						<div class="container-inside">
-
-							<div class="main-content align-center">
-
-								<!-- *** TEXT TITLE *** -->
-								<h1>
-									Sevco Security<br>
-								</h1>
-
-								<!-- *** COUNTDOWN TITLE *** -->
-								<!-- Set your date at the bottom of js/jquery.countdown.js -->
-
-								<!-- <h1>
-									official launch in<br>
-									<span id="getting-started"></span>
-								</h1> -->
-
-								<p class="on-home">Cybersecurity Situational Awareness
-								</p>
-								<br>
-                                <p><a href="support.html">Support</a>&nbsp;|&nbsp;<a href="privacy.html">Privacy Policy</a> | <a href=terms.html>Website Terms & Conditions</a></p>
-
-								<div class="command">
-									
-									<!-- ********** IF YOU WANT TO USE MORE POPUPS, SEE THE RECOMMENDATIONS AT THE END OF js/dialogFx.js ********** -->
-
-									<div class="clear"></div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-			</div>
-			<!-- +++ END - Home +++ -->
-		</div>
-		<!-- +++ / Fullpage sections +++ -->
-
-		<!-- CONTACT FORM - Answer for the contact form is displayed in the next div, do not remove it. -->       
-        <div id="block-answer" class="">
-
-            <div id="answer"></div>
-
+<html>
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div class="parent">
+            <div class="hero">
+                <img id="logo" src="img/logo.png">
+                <div id="tagline">
+                    <span>Persistent Cybersecurity Situational Awareness</span><br>for IT and Security Operations Teams
+                </div>
+            </div>
         </div>
-
-		<!-- NEWSLETTER FORM - Answer for the newsletter form is displayed in the next div, do not remove it. -->
-		<div class="block-message">
-
-			<div class="message">
-
-				<p class="notify-valid"></p>
-			</div>
-		</div>
-
-
-		<!-- ///////////////////\\\\\\\\\\\\\\\\\\\ -->
-        <!-- ********** jQuery Resources ********** -->
-        <!-- \\\\\\\\\\\\\\\\\\\/////////////////// -->
-
-        <!-- * Libraries jQuery, Easing and Bootstrap - Be careful to not remove them * -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery.easings.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-
-		<!-- Countdown plugin -->
-		<script src="js/jquery.countdown.js"></script>
-
-		<!-- FullPage plugin -->
-		<script src="js/jquery.fullPage.js"></script>
-
-        <!-- Slideshow plugin -->
-        <script src="js/vegas.js"></script>
-
-		<!-- Contact form plugin -->
-		<script src="js/contact-me.js"></script>
-
-		<!-- Popup Newsletter Form -->
-		<script src="js/classie.js"></script>
-		<script src="js/dialogFx.js"></script>
-
-		<!-- Newsletter plugin -->
-		<script src="js/notifyMe.js"></script>
-
-		<!-- Gallery plugin -->
-		<script src="js/jquery.detect_swipe.min.js"></script>
-		<script src="js/featherlight.js"></script> 
-		<script src="js/featherlight.gallery.js"></script>
-
-		<!-- Main JS File -->
-		<script src="js/main.js"></script>
-
-	</body>
-
+        <div class="below-the-fold">
+            <div class="blurb-what">
+                If it's on-prem, off-prem, end user workstation, mobile device, 
+                television, printer, EC2 instance or Docker container, your team 
+                is responsible for it. Doing that requires you know how many you have, 
+                where they are, who's using them and what they're doing - at all times.
+            </div>
+            <div class="blurb-who">
+                Sevco Security is a group of cybersecurity leaders from 
+                the U.S. Intelligence Community and top commercial vendors 
+                dedicated to giving you real time, persistent cyber security 
+                situational awareness for your corporate IT resources.
+            </div>
+        </div>
+        <div class="footer">
+            <span>(c) 2020 - Sevco Security, Inc</span>
+            <a href="contact.html">contact</a>
+            <a href="privacy.html">privacy</a>
+            <a href="support.html">support</a>
+            <a href="terms.html">terms</a>
+        </div>
+    </body>
 </html>
