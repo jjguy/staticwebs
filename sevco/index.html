@@ -20,6 +20,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
                 integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" 
                 crossorigin="anonymous"></script> 
+        <script> function createFcn(nm){(window.freshsales)[nm]=function(){(window.freshsales).push([nm].concat(Array.prototype.slice.call(arguments,0)))}; } (function(url,appToken,formCapture){window.freshsales=window.freshsales||[];if(window.freshsales.length==0){list='init identify trackPageView trackEvent set'.split(' ');for(var i=0;i<list.length;i++){var nm=list[i];createFcn(nm);}var t=document.createElement('script');t.async=1;t.src='https://assets.freshsales.io/assets/analytics.js';var ft=document.getElementsByTagName('script')[0];ft.parentNode.insertBefore(t,ft);freshsales.init('https://sevco.freshsales.io','df8824f23e2750c2dbb4263eb0f3ae1df832cf47f63b1a5d8da9a4f902ef63f4',true);}})();</script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Sevco Security</title>
     </head>
@@ -37,6 +38,11 @@
                             Persistent Cybersecurity Situational Awareness for IT and Security Operations Teams
                         </div>
                     </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#exampleModal">
+                            Get early access
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,7 +51,7 @@
                 <div class="col-6 blurb-what">
                     If it's on-prem, off-prem, end user workstation, mobile device, 
                     television, printer, EC2 instance or Docker container, your team 
-                    is responsible for it. Doing that requires you know how many you have, 
+                    is responsible for it. That requires you know how many you have, 
                     where they are, who's using them and what they're doing - at all times.
                 </div>
                 <div class="col-6 blurb-who">
@@ -63,6 +69,20 @@
             <div class="row footer">
                 <span>(c) 2020 - Sevco Security, Inc</span> <a href="tel:512-270-8949">512-270-8949</a> <a href="mailto:hello@sevco.io">hello@sevco.io</a>
             </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document" >
+            <div class="modal-content" style="background-color: #111111">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #efefef">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <script src='https://sevco.freshsales.io/web_forms/64fadba9c9badb939e83b60c39e38172e40d59b1602c2eec8be26771baf3bce2/form.js' crossorigin='anonymous' id='fs_64fadba9c9badb939e83b60c39e38172e40d59b1602c2eec8be26771baf3bce2'></script>
+            </div>
+          </div>
         </div>
     </body>
 </html>

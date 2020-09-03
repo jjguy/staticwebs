@@ -70,3 +70,10 @@ div.footer a {
   color: #8e8e8e8e;
 }
 
+.btn-primary { 
+    background-color: #112255;
+    border-color: #112255;
+    color: #efefef;
+    margin-top: 10px;
+}
+
