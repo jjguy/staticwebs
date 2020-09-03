@@ -1,42 +1,23 @@
-body {
-  background: #222222;
-  color: #eeeeee;
-  font-size: 80%;
+html, body {
+  background: #111111;
+  color: #efefef;
   padding: 20px;
   font-family: 'Roboto';
   font-size: 15px;
+  height: 100%;
 }
 
 a {
   color: #ee0000;
 }
 
-div.parent {
-  background: #222222;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-}
-
-div.hero {
-  background: #222222;
-  width: 50%;
-  padding: 20px;
-  overflow: auto;
-  text-align: center;
+div.logo { 
+    text-align: center;
 }
 
 div#tagline { 
     width: 70%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 20px; 
-    color: #8e8e8e8e;
+    color: #b1b1b1;
 }
 
 div#tagline span { 
@@ -45,7 +26,7 @@ div#tagline span {
 }
 
 img#logo {
-    width: 70%;
+    width: 100%;
 }
 
 div.below-the-fold { 
@@ -54,7 +35,7 @@ div.below-the-fold {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #8e8e8e8e;
+  color: #e8e8e8;
 }
 
 div.blurb-what { 
@@ -75,6 +56,7 @@ div.blurb-who {
 
 div.footer { 
   margin: 0 auto;
+  padding-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
